@@ -1,0 +1,6 @@
+export const CREDENTIALS = {
+    standard:{
+        user: 'standard_user',
+        pass: 'secret_sauce'
+    }
+};
