@@ -44,14 +44,14 @@ test.describe("Verifica interações com elementos do produto Sauce Labs Onesie"
     });
 
     test("validar adição do produto ao carrinho ao clicar no botão 'Add to cart'", async({page})=>{
-        await page.click('#add-to-cart-sauce-labs-onesie');
+        await page.getByTestId('add-to-cart-sauce-labs-onesie').click();
         await page.click('.shopping_cart_link');
         await expect(page).toHaveURL(/cart.html/);
         await expect(page.locator('.cart_quantity')).toHaveText('1');
     });
 
     test("validar remoção do produto do carrinho ao clicar no botão 'Remove'", async({page})=>{
-        await page.click('#add-to-cart-sauce-labs-onesie');
+        await page.getByTestId('add-to-cart-sauce-labs-onesie').click();
         await page.click('.shopping_cart_link');
         await expect(page).toHaveURL(/cart.html/);
         await page.click('#remove-sauce-labs-onesie');
@@ -59,7 +59,7 @@ test.describe("Verifica interações com elementos do produto Sauce Labs Onesie"
     });
 
     test("validar alteração do botão para 'Remove' após adicionar o produto", async({page})=>{
-        const button = page.locator('#add-to-cart-sauce-labs-onesie');
+        const button = page.getByTestId('add-to-cart-sauce-labs-onesie');
 
         await button.click();
 
@@ -67,7 +67,7 @@ test.describe("Verifica interações com elementos do produto Sauce Labs Onesie"
     });
 
     test("validar nome, preço e quantidade do Onesie no carrinho", async({page})=>{
-        await page.click('#add-to-cart-sauce-labs-onesie');
+        await page.getByTestId('add-to-cart-sauce-labs-onesie').click();
         await page.click('.shopping_cart_link');
 
         const produto = page.locator('.cart_item');
@@ -78,7 +78,7 @@ test.describe("Verifica interações com elementos do produto Sauce Labs Onesie"
     });
 
     test("validar retorno para os produtos pelo botão 'Continue Shopping'", async({page})=>{
-        await page.click('#add-to-cart-sauce-labs-onesie');
+        await page.getByTestId('add-to-cart-sauce-labs-onesie').click();
         await page.click('.shopping_cart_link');
         await page.click('#continue-shopping');
 
@@ -89,7 +89,7 @@ test.describe("Verifica interações com elementos do produto Sauce Labs Onesie"
 
 test.describe("Verifica fluxo de checkout do produto Sauce Labs Onesie", () => {
     test("finalizar compra do Sauce Labs Onesie", async({page})=>{
-        await page.click('#add-to-cart-sauce-labs-onesie');
+        await page.getByTestId('add-to-cart-sauce-labs-onesie').click();
         await page.click('.shopping_cart_link');
         await page.click('#checkout');
 
@@ -104,7 +104,7 @@ test.describe("Verifica fluxo de checkout do produto Sauce Labs Onesie", () => {
     });
 
     test("validar campos obrigatórios do checkout do Onesie", async({page})=>{
-        await page.click('#add-to-cart-sauce-labs-onesie');
+        await page.getByTestId('add-to-cart-sauce-labs-onesie').click();
         await page.click('.shopping_cart_link');
         await page.click('#checkout');
         await page.click('#continue');
