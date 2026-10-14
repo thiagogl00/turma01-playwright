@@ -33,13 +33,14 @@ test.describe("Verificação da visibilidade dos elementos do produto Sauce Labs
 test.describe("Verifica interações com elementos do produto Sauce Labs Onesie", () => {
     test("validar redirecionamento para a página de detalhes do produto ao clicar na imagem", async({page})=>{
         await page.click('#item_2_img_link');
-        await expect(page).toHaveURL(/inventory-item.html/); 
+        await expect(page).toHaveURL(/inventory-item\.html\?id=2/); 
         await expect(page.locator('.inventory_details_container')).toBeVisible();
     });
     
     test("validar redirecionamento para a página de detalhes do produto ao clicar no nome do produto", async({page})=>{
         await page.click('#item_2_title_link');
-        await expect(page).toHaveURL(/inventory-item.html/);
+        await expect(page).toHaveURL(/inventory-item\.html\?id=2/);
+        //await page.waitForTimeout(10000);
         await expect(page.locator('.inventory_details_container')).toBeVisible();
     });
 
