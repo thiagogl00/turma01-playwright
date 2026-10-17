@@ -56,3 +56,15 @@ Para visualizar o navegador durante a execução:
 npx playwright test --headed
 ```
 
+## Suíte OrangeHRM Demo
+
+Os fluxos funcionais do OrangeHRM Demo ficam nos arquivos `tests/orange-*.spec.ts`.
+Eles usam o ambiente:
+
+`https://opensource-demo.orangehrmlive.com/web/index.php`
+
+Executar somente os testes OrangeHRM:
+
+```bash
+npx playwright test tests/orange-auth.spec.ts tests/orange-reset.spec.ts tests/orange-pim.spec.ts
+```
