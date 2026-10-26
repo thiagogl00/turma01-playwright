@@ -1,7 +1,15 @@
 import { test, expect } from "@playwright/test";
+import { LoginPage } from "../pages/login.page";
 
+let loginPage: LoginPage;
+        
 test.describe('Testes de login',()=>{
-    test("Login válido redireciona para o inventário",async ({page})=>{
+    test.beforeEach(async ({page})=>{
+        loginPage = new LoginPage(page);
+        await loginPage.navigateToLoginPage();  
+        await expect(loginPage.page).toHaveTitle(/Swag Labs/);
+    });
+/*     test("Login válido redireciona para o inventário",async ({page})=>{
         await page.goto("/");
 
         await page.fill('#user-name','standard_user');
@@ -20,6 +28,20 @@ test.describe('Testes de login',()=>{
         await page.click('#login-button');
 
         await expect(page.locator(".error-message-container")).toBeVisible();
+    }); */
+
+    test("Login válido redireciona para o inventário",async ()=>{        
+        await loginPage.loginWithCredentials('standard_user','secret_sauce')
+
+        await expect(loginPage.page).toHaveURL(/inventory/);
+        await expect(loginPage.inventoryList).toBeVisible();
     });
+
+     test("Login inválido mostra mensagem de erro",async ()=>{
+        await loginPage.loginWithCredentials('user_incorreto','password_incorreta');
+
+        await expect(loginPage.error).toBeVisible();    
+    });
+    
 });
 
